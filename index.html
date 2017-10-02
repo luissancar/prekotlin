@@ -1,0 +1,382 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Kotlin</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section><img width="800" height="320" data-src="https://kotlinlang.org/assets/images/twitter-card/kotlin_800x320.png" alt="Down arrow"></section>
+
+
+			<section data-markdown>
+				## Variables
+				Las variables pueden ser mutables e inmutables.
+				Se declaran indicando val o var según sean inmutables o mutables.
+				```
+				var x = 7
+				val y: String = "my String"
+				var z = View(this)
+				```
+			</section>
+			<section data-markdown>
+				## Variables
+				Se hace casting automático de tipos.
+				Siempre que el compilador sea capaz de de detectar que no hay otra opción posible, el casting se hará automáticamente..
+				```
+				val z: View = findViewById(R.id.my_view)
+
+				if (z is TextView) {
+    			z.text = "I've been casted!"
+				}
+				```
+			</section>
+
+			<section  data-markdown>
+				## Variables
+				En Kotlin no hay primitivas, todo son objetos.
+				Los tipos enteros disponibles en Kotlin son:
+
+					- Long 64 bit
+					- Int 32 bit
+					- Short 16 bit
+					- Byte 8 bit
+			</section>
+
+			<section  data-markdown>
+				## Variables
+				Los tipos de punto flotante son:
+
+				  - Double 64 bit
+				  - Float 32 bit
+
+				El tipo booleano es:
+
+					- Boolean
+			</section>
+			<section data-markdown>
+				## Cadenas
+				Las cadenas pueden ser creadas ya sea con comillas dobles o comillas triples.
+				Los caracteres de escape pueden ser usados con comillas dobles.
+				```
+					val myString = "This is a String"
+					val escapeString = "This is a string with new line \n"
+
+				```
+
+			</section>
+			<section data-markdown>
+				## Cadenas
+				Para crear una cadena que se extienda múltiples líneas en el archivo fuente, usamos comillas triples:
+				```
+					val multipleStringLines = """
+        	This is first line
+        	This is second line
+        	This is third line """
+
+					```
+			</section>
+
+			<section data-markdown>
+				## Cadenas
+				Kotlin también soporta interpolación de cadena o plantillas de cadena. Esta es una manera más sencilla de construir cadenas dinámicas que concatenación, que es lo que usamos en Java. Usando plantillas de cadena, podemos insertar variables y expresiones en una cadena.
+
+				```
+					val accountBalance = 200
+					val bankMessage = "Your account balance is $accountBalance" // Your account balance is 200
+				```
+
+			</section>
+
+			<section data-markdown>
+				## cadenas
+				Si necesitas usar $ en una cadena utiliza \$.
+				También, puedes llamar métodos desde un String interpolado directamente; tienes que agregar llaves ${} para envolverlo.
+				```
+				val message = "The first letter in my name is ${name.first()}"
+				```
+			</section>
+
+			<section data-markdown>
+				## Arreglos
+				La Función arrayOf()
+				Por ejemplo, creemos un arreglo con algunos elementos usando arrayOf()
+
+				```
+				val myArray = arrayOf(4, 5, 7, 3)
+				```
+
+				Ahora, para acceder a cualquiera del elemento, podemos usar su índice: myArray[2].
+				Podemos pasar valores de diferentes tipos en el arrayOf() como argumentos.
+				```
+				val myArray = arrayOf(4, 5, 7, 3, "Chike", false)
+        ```
+			</section>
+
+			<section data-markdown>
+				## Arreglos
+				Para hacer cumplir que todos los valores del arreglo tienen el mismo tipo, ej. Int, declaramos un tipo llamando
+
+				```
+				  arrayOf&lt;Int&gt;() o intArrayOf().
+					val myArray3 = arrayOf&lt;Int&gt;(4, 5, 7, 3, "Chike", false)
+					val myArray4 = intArrayOf(4, 5, 7, 3, "Chike", false)
+				```
+				No compilaría.
+
+			</section>
+			<section data-markdown>
+				## El Constructor Array()
+				 El constructor de esta clase requiere un tamaño y una función lambda.
+				 En este caso, el trabajo de la función lambda es inicializar el arreglo con elementos.
+				 ```
+				 val numbersArray = Array(5, { i -> i * 2 })
+				 ```
+				 Pasamos 5 como el tamaño del arreglo en el primer argumento. El segundo argumento toma una función lambda, la cuál toma el índice del elemento del arreglo y después devuelve el valor para ser insertado en ese índice en el arreglo. Así que en el ejemplo de arriba, creamos un arreglo con elementos 0, 2, 4, 6, y 8.
+
+
+			</section>
+
+
+
+
+			<section data-markdown>
+				## Listas inmutables
+				La declaración de una lista inmutable sería así.
+				```
+				val readOnly: List<String> = listOf("Lunes", "Martes", "Sábado", "Domingo")
+				```
+				Existen varias funciones útiles para trabajar con ellas.
+				```
+				readOnly.size //Muestra el tamaño de la lista
+        readOnly.get(3) //Devuelve el valor de la posición 3
+        readOnly.first() //Devuelve el primer valor
+        readOnly.last() //Devuelve el último valor
+        println(readOnly) //[Lunes, Martes, Miércoles, Jueves, Viernes, Sábado, Domingo]
+        ```
+			</section>
+
+
+			<section data-markdown>
+				## Listas inmutables
+				También podemos filtrar usando el patrón iterator, que es un mecanismo para acceder a los elementos de la lista, por ejemplo .first() o .last()
+				```
+        val a = readOnly.filter { it == "Lunes" || it == "Juernes" }
+        ```
+			</section>
+
+
+			<section data-markdown>
+				## Listas mutables
+				 Las listas mutables, que poseen todo lo anterior, pero también nos da la posibilidad de ir rellenando la lista a medida que lo necesitemos.
+				 ```
+				 var mutableList=arrayListOf(1, 2, 3)
+
+				 mutableList.add("domingo")
+
+				  mutableList.add(0, "Semana: ")
+				 ```
+			</section>
+
+
+			<section data-markdown>
+				## Recorriendo listas
+				```
+				for (item in mutableList) {
+        print(item)
+          }
+
+	  		for ((indice, item) in mutableList.withIndex()) {
+	        println("La posición $indice contiene $item")
+	    	}
+				```
+			</section>
+
+
+						<section data-markdown>
+							## Arrays
+							```
+
+							var inta=IntArray(200)
+			    		var doublea=DoubleArray(200)
+			    		var chara=CharArray(200)
+
+			    		val c=inta.get(4)
+			    		val f=inta[5]
+							doublea.set(4,5.7)
+							```
+</section>
+
+			<section data-markdown>
+				## While
+				```
+				while (x > 0) {
+    			x--
+					}
+
+				do {
+    	     val y = retrieveData()
+				 		} while (y != null) // y is visible here!
+				```
+				Kotlin soporta break y continue.
+			</section>
+
+
+
+
+
+
+
+			<section data-markdown>
+				## Expresión when en Kotlin
+				Esta nos permite realizar una o varias acciones dependiendo del resultado recibido.
+				```
+				when (month) {
+			 		1 -> print("Enero")
+			 		2 -> print("Febrero")
+			 		3 -> print("Marzo")
+					....
+			 		12 -> print("Diciembre")
+			 	else -> {
+					 print("No corresponde a ningún mes del año")
+			 }
+	 }
+				```
+			</section>
+
+
+			<section data-markdown>
+				## La confición if
+				```
+				if(name == ("Aris")){
+        println("Se llama Aris")
+    			}else{
+        println("No se llama Aris")
+    			}
+				```
+			</section>
+
+			<section data-markdown>
+				## for
+				Podemos recorrer una array:
+				```
+				val array = arrayOf("a","b","c")
+    for (dato in array) {
+        println(dato)
+    }
+
+			  ```
+						</section>
+
+
+
+			<section data-markdown>
+				## for
+				Para recorrer una serie numérica:
+				```
+				for (i in 1..5 ) {
+			 println(i)
+	      }
+			```
+		  Mostraría 1 2 3 4 5
+			</section>
+
+			<section data-markdown>
+				## for
+				Para recorrer una serie numérica:
+
+				```
+				for (i in 1..5 step 2) {
+        println(i)
+    		}
+			```
+		  Mostraría 1 3 5
+			</section>
+
+
+			<section data-markdown>
+	 		 ## for
+	 		 Para recorrer una serie numérica:
+			 ```
+			 for (i in 5 downTo 1 step 2) {
+        println(i)
+    }
+
+	 	 ```
+	 	 Mostraría  5 3 1
+	 	 </section>
+			<section data-markdown>
+			</section>
+
+
+
+
+
+
+
+				<section data-markdown>
+					## Declaración de clases
+					```
+					class Person(name: String, surname: String) {
+							init {
+								// código constructor
+							}
+					}
+
+					var o= Person("Antonio","Velasco")
+					```
+				</section>
+
+				<section data-markdown>
+				</section>
+
+				<section data-markdown>
+				</section>
+				<section>
+				</section>
+
+				<section>
+				</section>
+
+				<section>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
